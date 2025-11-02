@@ -19,4 +19,17 @@ app.get('/', async (req, res) => {
     res.render('index.ejs')
 })
 
+// * Connections 
+
+const connect = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI)
+        console.log('🔒 Database connection established')
+    } catch (error) {
+        console.log('Something went wrong')
+    }
+}
+connect()
+
+
 app.listen(3000, () => console.log('🚀 Server working on port 3000'))
