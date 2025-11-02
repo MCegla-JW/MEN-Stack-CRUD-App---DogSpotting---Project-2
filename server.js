@@ -5,6 +5,9 @@ import bcrypt from 'bcrypt'
 import 'dotenv/config'
 import methodOverride from 'method-override'
 
+// * Controllers / Routers 
+import authController from './controllers/auth.js'
+
 const app = express()
 
 // * Middleware 
@@ -16,8 +19,14 @@ app.use(methodOverride('_method')) // override with POST having ?_method=DELETE
 
 // * Routes
 app.get('/', async (req, res) => {
-    res.render('index.ejs')
+    try {
+        res.render('index.ejs')
+    } catch (error) {
+        console.error('Something went wrong')
+    }
 })
+
+app.use('/auth', authController)
 
 // * Connections 
 
