@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import 'dotenv/config'
 import methodOverride from 'method-override'
+import session from 'express-session' // used for signing in user 
 
 // * Controllers / Routers 
 import authController from './controllers/auth.js'
@@ -15,6 +16,11 @@ app.use(express.urlencoded()) // req.body
 app.use(express.static('public')) // css
 app.use(morgan('dev')) // morgan 
 app.use(methodOverride('_method')) // override with POST having ?_method=DELETE
+app.use(session ({ // req.session
+    secret: process.env.SESSION_SECRET,
+    resave: false, 
+    saveUninitialized: true
+}))
 
 
 // * Routes

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/stylesheets/forms.css">
-    <title>Sign In</title>
+    <title>Sign Up</title>
 </head>
 <body>
         <nav class="navbar">
@@ -23,26 +23,26 @@
         <div class="main-content">
         <div class=page-content>
             <h1>SIGN UP</h1>
-        <form action="" method="get" class="sign-in">
+        <form action="/auth/sign-up" method="POST" class="sign-up">
                 <div class="email">
                 <label for="email">
                 </label>
-                <input type="text" id="email" placeholder="Email" required>
+                <input type="text" name="email" id="email" placeholder="Email" required>
             </div>
             <div class="username">
                 <label for="username">
                 </label>
-                <input type="text" id="username" placeholder="Username" required>
+                <input type="text" name="username" id="username" placeholder="Username" required>
             </div>
             <div class="password">
                 <label for="password">
                 </label>
-                <input type="text" id="password" placeholder="Password" required>
+                <input type="password" name="password" id="password" placeholder="Password" required>
             </div>
-                        <div class="re-type-password">
-                <label for="re-type-password">
+                <div class="confirmPassword">
+                <label for="confirmPassword">
                 </label>
-                <input type="text" id="re-type-password" placeholder="Re-Type Password" required>
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Re-Type Password" required>
             </div>
             <div class="button">
                 <button>Submit</button>
