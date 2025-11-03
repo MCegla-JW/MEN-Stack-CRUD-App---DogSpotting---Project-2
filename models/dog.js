@@ -6,7 +6,7 @@ const dogSchema = new mongoose.Schema ({
     age: {type: Number, required: true},
     location: {type: String, required: true},
     description: {type: String, required: true}, 
-    photoURL: {ype: String},
+    photoURL: {type: String},
     owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}, 
     likedByUsers: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 }) 

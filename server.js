@@ -4,11 +4,13 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import 'dotenv/config'
 import methodOverride from 'method-override'
+import MongoStore from 'connect-mongo'
 import session from 'express-session' // used for signing in user 
 import passUserToView from './middleware/pass-user-to-view.js'
 
 // * Controllers / Routers 
 import authController from './controllers/auth.js'
+import dogController from './controllers/dogs.js'
 
 const app = express()
 
@@ -20,7 +22,8 @@ app.use(methodOverride('_method')) // override with POST having ?_method=DELETE
 app.use(session ({ // req.session
     secret: process.env.SESSION_SECRET,
     resave: false, 
-    saveUninitialized: true
+    saveUninitialized: true, 
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI})
 }))
 app.use(passUserToView)
 
@@ -39,6 +42,7 @@ app.get('/', async (req, res) => {
 })
 
 app.use('/auth', authController)
+app.use('/dogs', dogController)
 
 // * Connections 
 

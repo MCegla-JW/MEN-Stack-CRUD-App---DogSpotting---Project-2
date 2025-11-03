@@ -16,7 +16,7 @@ form button {
     background-color: #F8D57E;
     color: black;
     font-size: 16px;
-    border: #F8D57E;
+    border: solid #F8D57E;
     border-radius: 20px;
     cursor: pointer;
     padding: 10px 20px;
@@ -27,11 +27,11 @@ form button:hover {
     background-color: #F8D57E;
     color: black;
     font-size: 16px;
-    border: solid #A88120;
+    border: solid #ebab0b;
     border-radius: 20px;
     cursor: pointer;
     padding: 10px 20px;
-    gap: 10px;
+    margin-top: 20px;
 }
 
 form {
