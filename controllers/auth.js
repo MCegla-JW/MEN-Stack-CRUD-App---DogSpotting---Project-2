@@ -1,13 +1,16 @@
 import express from 'express'
 import User from '../models/user.js'
 import bcrypt from 'bcrypt'
+import isSignedIn from '../middleware/is-signed-in.js'
+import isSignedOut from '../middleware/is-signed-out.js'
+import passUserToView from '../middleware/pass-user-to-view.js'
 
 const router = express.Router()
 
 // * Routes 
 
 // * GET - auth/sign-up - form render
-router.get('/sign-up', (req, res) => {
+router.get('/sign-up', isSignedOut, (req, res) => {
     res.render('auth/sign-up.ejs')
 })
 
@@ -35,7 +38,7 @@ router.post('/sign-up', async (req, res) => {
 
 
 // * GET - auth/sign-in -form render
-router.get('/sign-in', (req, res) => {
+router.get('/sign-in', isSignedOut, (req, res) => {
     res.render('auth/sign-in.ejs')
 })
 
@@ -47,15 +50,32 @@ router.post('/sign-in', async (req, res) => {
         if (!bcrypt.compareSync(req.body.password, userToSignIn.password)) {
             return res.status(401).send('Invalid credentials')
         }
-        console.log('REQ SESSION:', req.session)
+        //console.log('REQ SESSION:', req.session)
         req.session.user = { 
             _id: userToSignIn._id,
             username: userToSignIn.username}
-        res.redirect('/profile.ejs')
+        res.redirect('/auth/profile')
     } catch (error) {
         console.error('Something went wrong')
         return res.status(500).send('Something went wrong. Please try again later.')
     }
+})
+
+// * GET - auth/profile
+router.get('/profile', isSignedIn, async (req, res) => {
+    try {
+    res.render('auth/profile.ejs', { user: req.session.user })
+    } catch (error) {
+        console.error('Something went wrong')
+        return res.status(500).send('Something went wrong. Please try again later')
+    }
+})
+
+// * GET - auth/sign-out
+router.get('/sign-out', (req, res) => {
+    req.session.destroy(() => {
+    res.redirect('/')
+})
 })
 
 export default router 

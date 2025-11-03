@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt'
 import 'dotenv/config'
 import methodOverride from 'method-override'
 import session from 'express-session' // used for signing in user 
+import passUserToView from './middleware/pass-user-to-view.js'
 
 // * Controllers / Routers 
 import authController from './controllers/auth.js'
@@ -21,7 +22,12 @@ app.use(session ({ // req.session
     resave: false, 
     saveUninitialized: true
 }))
+app.use(passUserToView)
 
+app.use((req, res, next) => {
+    console.log(req.session)
+    next()
+})
 
 // * Routes
 app.get('/', async (req, res) => {

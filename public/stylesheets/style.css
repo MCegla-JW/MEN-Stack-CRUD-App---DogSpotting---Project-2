@@ -160,3 +160,38 @@ footer {
     width: 400px;
     height: 400px;
 }
+
+.menu button {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin-top: 30px;
+    font-size: 20px;
+    border: solid #5C33FF;
+    border-radius: 8px;
+    color: whitesmoke;
+    background-color: #5C33FF;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menu button:hover {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin-top: 30px;
+    font-size: 20px;
+    border: solid #8668FF;
+    border-radius: 8px;
+    color: whitesmoke;
+    background-color: #5C33FF;
+    cursor: pointer;   
+}
+
+.menu a {
+    text-decoration: none;
+}
+
+.profile-page .hero-image {
+    margin-left: -150px;
+}
