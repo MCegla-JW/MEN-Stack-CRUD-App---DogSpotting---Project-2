@@ -35,6 +35,9 @@ app.use((req, res, next) => {
 // * Routes
 app.get('/', async (req, res) => {
     try {
+        if (req.session.user) {
+            return res.redirect('/auth/profile')
+        }
         res.render('index.ejs')
     } catch (error) {
         console.error('Something went wrong')
