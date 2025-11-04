@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/stylesheets/forms.css">
 </head>
-<body class="new-form-page">
+<body class="edit-form-page">
     <nav class="navbar">
         <div class="navdiv">
             <div class="nav-left">
@@ -19,7 +19,7 @@
             </div>
             <div class="nav-right">
                 <div class="navbar">
-                <a href="/auth/profile">Back</a>
+                <a href="/dogs">Back</a>
                 </div>
                 <a href="/auth/sign-out"><button class="btn">Sign Out</button></a>
             </div>
@@ -28,32 +28,32 @@
     <main>
         <div class="main-content">
         <div class=page-content>
-            <h1>CREATE A DOG SPOT</h1>
-        <form action="/dogs/new" method="POST" class="sign-up" enctype="multipart/form-data">
+            <h1>EDIT <%= dog.name %></h1>
+        <form action="/dogs/<%=dog._id%>?_method=PUT" method="POST" class="edit-form" enctype="multipart/form-data">
                 <div class="name">
                 <label for="name">
                 </label>
-                <input type="text" name="name" id="name" placeholder="Name" required>
+                <input type="text" name="name" id="name" placeholder="Name" value="<%= dog.name%>" required>
             </div>
             <div class="breed">
                 <label for="breed">
                 </label>
-                <input type="text" name="breed" id="breed" placeholder="Breed" required>
+                <input type="text" name="breed" id="breed" placeholder="Breed" value="<%= dog.breed%>"required>
             </div>
             <div class="age">
                 <label for="age">
                 </label>
-                <input type="number" name="age" id="age" placeholder="Age" required>
+                <input type="number" name="age" id="age" placeholder="Age" value="<%= dog.age%>" required>
             </div>
                 <div class="location">
                 <label for="location">
                 </label>
-                <input type="text" name="location" id="location" placeholder="Location" required>
+                <input type="text" name="location" id="location" placeholder="Location" value="<%= dog.location%>" required>
             </div>
                 <div class="description">
                 <label for="descrption">
                 </label>
-                <textarea name="description" rows="5" cols="45" placeholder="Description"></textarea>
+                <textarea name="description" rows="5" cols="45" placeholder="Description"><%= dog.description%></textarea>
             </div>
             <div class="photo">
                 <label for="photo"></label>
