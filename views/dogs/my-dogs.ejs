@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Dogs</title>
+    <title>My Dogs</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="/stylesheets/forms.css">
+    <link rel="stylesheet" href="stylesheets/forms.css">
 </head>
-
-<body class="home">
-    <nav class="navbar">
+<body>
+        <nav class="navbar">
         <div class="navdiv">
             <div class="nav-left">
                 <img class="app-logo" src="/assets/images/App-Logo.png" alt="image of a brown dog with a bone">
@@ -27,9 +25,29 @@
     </nav>
     <main>
         <div class="main-content-home">
-            <h1>All Dog Spots</h1>
+            <h1>My Dog Spots</h1>
+            <% if (ownedDogSpots.length > 0) { %>
             <ul>
-                <% dogs.forEach(dog=> { %>
+                <% ownedDogSpots.forEach(dog=> { %>
+                    <li>
+                        <a href="/dogs/<%= dog._id %>">
+                            <img src="<%= dog.photoURL ? dog.photoURL : '/assets/images/placeholder.png' %>"
+                                alt="<%= dog.name %>" class="dog-list-image">
+                        </a>
+                        <span>
+                            <a href="/dogs/<%= dog._id %>"><%= dog.name %></a>
+                        </span>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } else { %> 
+            <p>There are currently no dogs to display</p>
+        <% } %>
+             
+            <h2>My Liked Dogs</h2>
+            <% if (likedDogs.length > 0) { %>
+            <ul>
+                <% likedDogs.forEach(dog=> { %>
                     <li>
                         <a href="/dogs/<%= dog._id %>">
                             <img src="<%= dog.photoURL ? dog.photoURL : '/assets/images/placeholder.png' %>"
@@ -42,8 +60,10 @@
                     </li>
                     <% }) %>
             </ul>
+            <% } else { %> 
+            <p>There are currently no dogs to display</p>
+        <% } %>
         </div>
     </main>
 </body>
-
 </html>

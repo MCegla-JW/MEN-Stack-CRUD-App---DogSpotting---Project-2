@@ -11,6 +11,18 @@ router.get('/new', isSignedIn, (req, res) => {
     res.render('dogs/new.ejs')
 })
 
+
+router.get('/my-dogs', isSignedIn, async (req, res) => {
+    try {
+        const ownedDogSpots = await Dog.find({ owner: req.session.user._id})
+        const likedDogs = await Dog.find({ likedByUsers: req.session.user._id })
+        res.render('dogs/my-dogs.ejs', { ownedDogSpots, likedDogs })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Something went wrong. Please try again later.')
+    }
+})
+
 // * GET - /:dogId 
 router.get('/:dogId', async (req, res) => {
     try {
@@ -132,5 +144,6 @@ router.delete('/:dogId/liked-by/:userId', isSignedIn, async (req, res) => {
         res.status(500).send('Something went wrong. Please try again later.')
     }
 })
+
 
 export default router 
