@@ -62,9 +62,15 @@
             </div>
             <% } %>
             <% if (user) { %>
+                <% if (userHasLiked) { %> 
+                    <form action="/dogs/<%= dog._id %>/liked-by/<%= user._id %>?_method=DELETE" method="POST">
+                    <button class="btn"> Remove like </button>
+                </form>
+                <% } else { %> 
                 <form action="/dogs/<%= dog._id %>/liked-by/<%= user._id %>" method="POST">
                     <button class="btn"> Give <%= dog.name %> a like! </button>
                 </form>
+                <% } %>
                 <form>
                     <button class="btn"><a href="/dogs"> Back </a></button>
                 </form>

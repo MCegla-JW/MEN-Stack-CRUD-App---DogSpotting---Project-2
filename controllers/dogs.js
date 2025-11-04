@@ -16,7 +16,10 @@ router.get('/:dogId', async (req, res) => {
     try {
         const dogId = req.params.dogId
         const dog = await Dog.findById(dogId).populate('owner')
-        res.render('dogs/show.ejs', { dog, user: req.session.user })
+        const userHasLiked = dog.likedByUsers.some(user => {
+            return user.equals(req.session.user._id)
+        })
+        res.render('dogs/show.ejs', { dog, user: req.session.user, userHasLiked })
     } catch (error) {
         console.error(error)
         return res.status(500).send('Something went wrong')
@@ -102,12 +105,26 @@ router.put('/:dogId', isSignedIn, upload.single('photoURL'), async (req, res) =>
     } 
     })
 
-// * Favourite     
+// * Add Favourite     
 router.post('/:dogId/liked-by/:userId', isSignedIn, async (req, res) => {
     try {
         const dogId = req.params.dogId
         await Dog.findByIdAndUpdate(dogId, {
             $push: { likedByUsers: req.session.user._id},
+        })
+        res.redirect(`/dogs/${dogId}`)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Something went wrong. Please try again later.')
+    }
+})
+
+// * Delete Favourite     
+router.delete('/:dogId/liked-by/:userId', isSignedIn, async (req, res) => {
+    try {
+        const dogId = req.params.dogId
+        await Dog.findByIdAndUpdate(dogId, {
+            $pull: { likedByUsers: req.session.user._id},
         })
         res.redirect(`/dogs/${dogId}`)
     } catch (error) {
