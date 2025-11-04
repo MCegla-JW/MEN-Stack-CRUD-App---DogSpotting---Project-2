@@ -30,22 +30,33 @@
             <h1>All Dogs</h1>
             <ul>
                 <% dogs.forEach(dog=> { %>
-                    <li><a href="/dogs/<%= dog._id %>">
-                            <%= dog.name %>
-                        </a></li>
+                    <li>
+                        <a href="/dogs/<%= dog._id %>">
+                            <img src="<%= dog.photoURL ? dog.photoURL : '/assets/images/placeholder.png' %>"
+                                alt="<%= dog.name %>" class="dog-list-image">
+
+                        </a>
+                        <span>
+                            <a href="/dogs/<%= dog._id %>"><%= dog.name %></a>
+                        </span>
+                    </li>
                     <% }) %>
             </ul>
             <h2>My Liked Dogs</h2>
             <ul>
                 <% dogs.forEach(dog=> { %>
-                    <li><a href="/dogs/<%= dog._id %>">
-                            <%= dog.name %>
-                        </a></li>
+                    <li>
+                        <a href="/dogs/<%= dog._id %>">
+                            <img src="<%= dog.photoURL ? dog.photoURL : '/assets/images/placeholder.png' %>"
+                                alt="<%= dog.name %>" class="dog-list-image">
+
+                        </a>
+                        <span>
+                            <a href="/dogs/<%= dog._id %>"><%= dog.name %></a>
+                        </span>
+                    </li>
                     <% }) %>
             </ul>
-        </div>
-        <div class="hero-home">
-            <img class="hero-image" src="/assets/images/Hero-Image.PNG" alt="cartoon of a small white dog smiling">
         </div>
     </main>
 </body>

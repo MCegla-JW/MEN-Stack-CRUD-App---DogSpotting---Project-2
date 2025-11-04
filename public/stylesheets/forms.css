@@ -67,12 +67,12 @@ form {
     white-space: nowrap;
 }
 
-main {
+/* main .sign-in .sign-up .profile {
     background: linear-gradient(to right, #EAE3FF 55%, #f7f5ff 45%);
     padding-top: 60px;
     padding-right: 90px;
 }
-
+*/
 
 .hero-image {
     width: 500px;
