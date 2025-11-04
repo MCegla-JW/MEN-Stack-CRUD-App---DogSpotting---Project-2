@@ -49,6 +49,7 @@
             <p>
                 <%= dog.description %>
             </p>
+            <p>Spotted By: <%= dog.owner.username %></p>
             <p>Liked by <%= dog.likedByUsers.length %> people</p>
         </div>
         <% if (user && dog.owner._id.equals(user._id)) { %>
