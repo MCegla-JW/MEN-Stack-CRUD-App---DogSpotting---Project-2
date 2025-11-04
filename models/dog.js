@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 
+
+
 const dogSchema = new mongoose.Schema ({
     name: {type: String, required: true}, 
     breed: {type: String, required: true}, 
@@ -8,7 +10,7 @@ const dogSchema = new mongoose.Schema ({
     description: {type: String, required: true}, 
     photoURL: {type: String},
     owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}, 
-    likedByUsers: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    likedByUsers: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 }) 
 
 const Dog = mongoose.model('Dog', dogSchema)

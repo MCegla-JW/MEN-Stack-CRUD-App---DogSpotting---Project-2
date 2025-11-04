@@ -49,6 +49,7 @@
             <p>
                 <%= dog.description %>
             </p>
+            <p>Liked by <%= dog.likedByUsers.length %> people</p>
         </div>
         <% if (user && dog.owner._id.equals(user._id)) { %>
             <div class="controls">
@@ -60,9 +61,14 @@
                 </form>
             </div>
             <% } %>
+            <% if (user) { %>
+                <form action="/dogs/<%= dog._id %>/liked-by/<%= user._id %>" method="POST">
+                    <button class="btn"> Give <%= dog.name %> a like! </button>
+                </form>
                 <form>
                     <button class="btn"><a href="/dogs"> Back </a></button>
                 </form>
+             <% } %>   
     </main>
 </body>
 

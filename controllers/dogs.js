@@ -102,4 +102,18 @@ router.put('/:dogId', isSignedIn, upload.single('photoURL'), async (req, res) =>
     } 
     })
 
+// * Favourite     
+router.post('/:dogId/liked-by/:userId', isSignedIn, async (req, res) => {
+    try {
+        const dogId = req.params.dogId
+        await Dog.findByIdAndUpdate(dogId, {
+            $push: { likedByUsers: req.session.user._id},
+        })
+        res.redirect(`/dogs/${dogId}`)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Something went wrong. Please try again later.')
+    }
+})
+
 export default router 
