@@ -283,3 +283,35 @@ footer {
     margin-bottom: 10px;
     border: solid black;
 }
+
+#delete-modal {
+  display: none;
+  background-color: rgba(0,0,0,0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  height: 100vh;
+  right: 0;
+}
+
+#delete-modal.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#delete-modal > div {
+  background: #e3dcc4;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+#delete-modal > div .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
