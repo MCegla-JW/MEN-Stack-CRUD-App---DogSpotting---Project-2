@@ -1,11 +1,12 @@
 import express from 'express'
 import Dog from '../models/dog.js'
 import isSignedIn from '../middleware/is-signed-in.js'
-import multer from 'multer'
 import User from '../models/user.js'
+import upload from '../middleware/upload.js'
+import { uploadBuffer } from '../config/cloudinary.js'
 
 const router = express.Router()
-const upload = multer({ dest: 'uploads/' })
+
 
 // * GET - /dogs/new
 router.get('/new', isSignedIn, (req, res) => {
@@ -47,7 +48,11 @@ router.get('/:dogId', async (req, res) => {
 // * POST 
 router.post('/new', isSignedIn, upload.single('photoURL'), async (req, res, next) => {
     try {
-        console.log('Upload succesful', req.file)
+        if (req.file) {
+            const uploadResult = await uploadBuffer(req.file.buffer)
+            req.body.photoURL = uploadResult.secure_url
+            console.log('Upload succesful', uploadResult)
+        }
         req.body.owner = req.session.user._id
         const createdDog = await Dog.create(req.body)
         return res.redirect(`/dogs/${createdDog._id}`)
@@ -112,8 +117,11 @@ router.put('/:dogId', isSignedIn, upload.single('photoURL'), async (req, res) =>
         return res.redirect(`/dogs/${dogId}`)
     }
         if (req.file) {
-            req.body.photoURL = `/uploads/${req.file.filename}`
+            const uploadResult = await uploadBuffer(req.file.buffer)
+            req.body.photoURL = uploadResult.secure_url
+            console.log('Upload succesful', uploadResult)
         }
+    
         const updatedDog = await Dog.findByIdAndUpdate(dogId, req.body)
         req.session.message = `Dog ${updatedDog.name} was succesfully updated.`
         return res.redirect(`/dogs/${dogId}`)
