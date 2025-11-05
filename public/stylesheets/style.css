@@ -315,3 +315,12 @@ footer {
     justify-content: space-between;
     gap: 20px;
 }
+
+.show > .rating-box {
+    border: solid black;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

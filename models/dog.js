@@ -1,6 +1,11 @@
 import mongoose from 'mongoose'
 
-
+const ratingSchema = new mongoose.Schema({
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+    stars: { type: Number, min: 1, max: 5, required: true }
+}, { 
+    timestamps: true 
+})
 
 const dogSchema = new mongoose.Schema ({
     name: {type: String, required: true}, 
@@ -10,7 +15,8 @@ const dogSchema = new mongoose.Schema ({
     description: {type: String, required: true}, 
     photoURL: {type: String},
     owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}, 
-    likedByUsers: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+    likedByUsers: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+    ratings: [ratingSchema] 
 }) 
 
 const Dog = mongoose.model('Dog', dogSchema)

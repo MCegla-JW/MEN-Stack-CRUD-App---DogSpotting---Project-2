@@ -51,7 +51,6 @@
                 <%= dog.description %>
             </p>
             <p>Spotted By: <%= dog.owner.username %></p>
-            <p>Liked by <%= dog.likedByUsers.length %> people</p>
         </div>
         <% if (user && dog.owner._id.equals(user._id)) { %>
             <div class="controls">
@@ -61,7 +60,7 @@
                     <button id="open-delete-modal" class="btn"> Delete <%= dog.name %></button>
             </div>
             <% } %>
-            <% if (user) { %>
+            <% if (user && !dog.owner._id.equals(user._id)) { %>
                 <% if (userHasLiked) { %> 
                     <form action="/dogs/<%= dog._id %>/liked-by/<%= user._id %>?_method=DELETE" method="POST">
                     <button class="btn"> Remove like </button>
@@ -76,6 +75,38 @@
                 </form>
              <% } %>   
     </main>
+<div class="rating-box"></div>
+    <% if (user && !dog.owner._id.equals(user._id)) { %> 
+        <h2>Rate this dog</h2>
+        <% if (userHasRated) { %>
+        <form action="/dogs/<%= dog._id %>/rating?_method=DELETE" method="POST">
+            <button class="btn"> Remove Rating </button>
+        </form>
+        <% } else { %>
+    <form action="/dogs/<%= dog._id %>/rating" method="POST">
+        <select name="stars" id="stars" required>
+            <option value="1">🐶</option>
+            <option value="2">🐶🐶</option>
+            <option value="3">🐶🐶🐶</option>
+            <option value="4">🐶🐶🐶🐶</option>
+            <option value="5">🐶🐶🐶🐶🐶</option>
+        </select>
+        <button class="btn">Submit</button>
+        <% } %>
+    </form>
+    <% } %>
+    <h3>User Likes</h3>
+    <p>Liked by <%= dog.likedByUsers.length %> people</p>
+    <h3>User Ratings</h3>
+    <% if (dog.ratings.length > 0) { %>
+        <% dog.ratings.forEach(rating => { %>
+            <p><%= '🐶'.repeat(rating.stars) %> 
+            Rated by: <%= rating.user.username %></p>
+        <% }) %>
+        <% } else { %> 
+            <p>No ratings yet</p>
+        <% } %>
+    </div>
 
     <div id="delete-modal">
         <div>

@@ -2,6 +2,7 @@ import express from 'express'
 import Dog from '../models/dog.js'
 import isSignedIn from '../middleware/is-signed-in.js'
 import multer from 'multer'
+import User from '../models/user.js'
 
 const router = express.Router()
 const upload = multer({ dest: 'uploads/' })
@@ -27,11 +28,16 @@ router.get('/my-dogs', isSignedIn, async (req, res) => {
 router.get('/:dogId', async (req, res) => {
     try {
         const dogId = req.params.dogId
-        const dog = await Dog.findById(dogId).populate('owner')
+        const dog = await Dog.findById(dogId)
+        .populate('owner') 
+        .populate('ratings.user')
         const userHasLiked = dog.likedByUsers.some(user => {
             return user.equals(req.session.user._id)
         })
-        res.render('dogs/show.ejs', { dog, user: req.session.user, userHasLiked })
+        const userHasRated = dog.ratings.some(rating => {
+            return rating.user._id.equals(req.session.user._id)
+        })
+        res.render('dogs/show.ejs', { dog, user: req.session.user, userHasLiked, userHasRated })
     } catch (error) {
         console.error(error)
         return res.status(500).send('Something went wrong')
@@ -145,5 +151,34 @@ router.delete('/:dogId/liked-by/:userId', isSignedIn, async (req, res) => {
     }
 })
 
+// * Create rating 
+// add rating object into the ratings array on the dog document 
+router.post('/:dogId/rating', isSignedIn, async (req, res) => {
+    try {
+    const dogId = req.params.dogId
+    const dog = await Dog.findById(dogId)
+    req.body.user = req.session.user._id
+    dog.ratings.push(req.body)
+    await dog.save()
+    res.redirect(`/dogs/${dogId}`)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Something went wrong')
+    }
+})
+
+router.delete('/:dogId/rating', isSignedIn, async (req, res) => {
+    try {
+    const dogId = req.params.dogId
+    const dog = await Dog.findById(dogId)
+    req.body.user = req.session.user._id
+    dog.ratings.pull(req.body)
+    await dog.save()
+    res.redirect(`/dogs/${dogId}`)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Something went wrong')
+    }
+})
 
 export default router 
