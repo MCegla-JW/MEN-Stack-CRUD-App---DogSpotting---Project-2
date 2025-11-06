@@ -17,22 +17,22 @@ router.get('/sign-up', isSignedOut, (req, res) => {
 // * POST - auth/sing-up - send info to database
 router.post('/sign-up', async (req, res) => {
     try {
-        const username = req.body.username 
-        const email = req.body.email 
-        const password = req.body.password 
+        const username = req.body.username
+        const email = req.body.email
+        const password = req.body.password
         const confirmPassword = req.body.confirmPassword
         if (password !== confirmPassword) throw new Error('Passwords do not match. Try again.')
         const usernameInDatabase = await User.findOne({ username: username })
         if (usernameInDatabase) throw new Error(`Username "${username}" already taken. Try a new one.`)
-        const emailInDatabase = await User.findOne({ email: email})    
+        const emailInDatabase = await User.findOne({ email: email })
         if (emailInDatabase) throw new Error(`Email "${email}" already in use. Try a new one.`)
-        req.body.password = bcrypt.hashSync(password, 12)   
+        req.body.password = bcrypt.hashSync(password, 12)
         const newUser = await User.create(req.body)
         res.redirect('/auth/sign-in')
         console.log('User created')
     } catch (error) {
-    console.log(error.message)
-    res.render('auth/sign-up.ejs', { error: error.message })
+        console.log(error.message)
+        res.render('auth/sign-up.ejs', { error: error.message })
     }
 })
 
@@ -45,15 +45,16 @@ router.get('/sign-in', isSignedOut, (req, res) => {
 // * POST - auth/sign-in 
 router.post('/sign-in', async (req, res) => {
     try {
-        const userToSignIn = await User.findOne({ username: req.body.username})
+        const userToSignIn = await User.findOne({ username: req.body.username })
         if (!userToSignIn) return res.status(401).send('User does not exist')
         if (!bcrypt.compareSync(req.body.password, userToSignIn.password)) {
             return res.status(401).send('Invalid credentials')
         }
         //console.log('REQ SESSION:', req.session)
-        req.session.user = { 
+        req.session.user = {
             _id: userToSignIn._id,
-            username: userToSignIn.username}
+            username: userToSignIn.username
+        }
         res.redirect('/auth/profile')
     } catch (error) {
         console.error('Something went wrong')
@@ -64,7 +65,7 @@ router.post('/sign-in', async (req, res) => {
 // * GET - auth/profile
 router.get('/profile', isSignedIn, async (req, res) => {
     try {
-    res.render('auth/profile.ejs', { user: req.session.user })
+        res.render('auth/profile.ejs', { user: req.session.user })
     } catch (error) {
         console.error('Something went wrong')
         return res.status(500).send('Something went wrong. Please try again later')
@@ -74,8 +75,8 @@ router.get('/profile', isSignedIn, async (req, res) => {
 // * GET - auth/sign-out
 router.get('/sign-out', (req, res) => {
     req.session.destroy(() => {
-    res.redirect('/')
-})
+        res.redirect('/')
+    })
 })
 
 export default router 

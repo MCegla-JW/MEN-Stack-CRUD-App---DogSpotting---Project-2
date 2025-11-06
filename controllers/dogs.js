@@ -16,7 +16,7 @@ router.get('/new', isSignedIn, (req, res) => {
 
 router.get('/my-dogs', isSignedIn, async (req, res) => {
     try {
-        const ownedDogSpots = await Dog.find({ owner: req.session.user._id})
+        const ownedDogSpots = await Dog.find({ owner: req.session.user._id })
         const likedDogs = await Dog.find({ likedByUsers: req.session.user._id })
         res.render('dogs/my-dogs.ejs', { ownedDogSpots, likedDogs })
     } catch (error) {
@@ -30,8 +30,8 @@ router.get('/:dogId', async (req, res) => {
     try {
         const dogId = req.params.dogId
         const dog = await Dog.findById(dogId)
-        .populate('owner') 
-        .populate('ratings.user')
+            .populate('owner')
+            .populate('ratings.user')
         const userHasLiked = dog.likedByUsers.some(user => {
             return user.equals(req.session.user._id)
         })
@@ -113,30 +113,30 @@ router.put('/:dogId', isSignedIn, upload.single('photoURL'), async (req, res) =>
         const dogId = req.params.dogId
         const dog = await Dog.findById(dogId)
         if (!dog.owner.equals(req.session.user._id)) {
-        req.session.message = 'Ypu do not have permission to edit this lsiting'
-        return res.redirect(`/dogs/${dogId}`)
-    }
+            req.session.message = 'Ypu do not have permission to edit this lsiting'
+            return res.redirect(`/dogs/${dogId}`)
+        }
         if (req.file) {
             const uploadResult = await uploadBuffer(req.file.buffer)
             req.body.photoURL = uploadResult.secure_url
             console.log('Upload succesful', uploadResult)
         }
-    
+
         const updatedDog = await Dog.findByIdAndUpdate(dogId, req.body)
         req.session.message = `Dog ${updatedDog.name} was succesfully updated.`
         return res.redirect(`/dogs/${dogId}`)
     } catch (error) {
         console.error(error)
         res.status(500).send('Something went wrong. Please try again')
-    } 
-    })
+    }
+})
 
 // * Add Favourite     
 router.post('/:dogId/liked-by/:userId', isSignedIn, async (req, res) => {
     try {
         const dogId = req.params.dogId
         await Dog.findByIdAndUpdate(dogId, {
-            $push: { likedByUsers: req.session.user._id},
+            $push: { likedByUsers: req.session.user._id },
         })
         res.redirect(`/dogs/${dogId}`)
     } catch (error) {
@@ -150,7 +150,7 @@ router.delete('/:dogId/liked-by/:userId', isSignedIn, async (req, res) => {
     try {
         const dogId = req.params.dogId
         await Dog.findByIdAndUpdate(dogId, {
-            $pull: { likedByUsers: req.session.user._id},
+            $pull: { likedByUsers: req.session.user._id },
         })
         res.redirect(`/dogs/${dogId}`)
     } catch (error) {
@@ -163,12 +163,12 @@ router.delete('/:dogId/liked-by/:userId', isSignedIn, async (req, res) => {
 // add rating object into the ratings array on the dog document 
 router.post('/:dogId/rating', isSignedIn, async (req, res) => {
     try {
-    const dogId = req.params.dogId
-    const dog = await Dog.findById(dogId)
-    req.body.user = req.session.user._id
-    dog.ratings.push(req.body)
-    await dog.save()
-    res.redirect(`/dogs/${dogId}`)
+        const dogId = req.params.dogId
+        const dog = await Dog.findById(dogId)
+        req.body.user = req.session.user._id
+        dog.ratings.push(req.body)
+        await dog.save()
+        res.redirect(`/dogs/${dogId}`)
     } catch (error) {
         console.error(error)
         res.status(500).send('Something went wrong')
@@ -177,12 +177,12 @@ router.post('/:dogId/rating', isSignedIn, async (req, res) => {
 
 router.delete('/:dogId/rating', isSignedIn, async (req, res) => {
     try {
-    const dogId = req.params.dogId
-    const dog = await Dog.findById(dogId)
-    req.body.user = req.session.user._id
-    dog.ratings.pull(req.body)
-    await dog.save()
-    res.redirect(`/dogs/${dogId}`)
+        const dogId = req.params.dogId
+        const dog = await Dog.findById(dogId)
+        req.body.user = req.session.user._id
+        dog.ratings.pull(req.body)
+        await dog.save()
+        res.redirect(`/dogs/${dogId}`)
     } catch (error) {
         console.error(error)
         res.status(500).send('Something went wrong')

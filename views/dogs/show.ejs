@@ -56,10 +56,10 @@
                     <button id="open-delete-modal" class="btn"> Delete <%= dog.name %></button>
                     <% } %>
                         <% if (user && !dog.owner._id.equals(user._id)) { %>
-                                        <form>
-                                            <button class="btn"><a href="/dogs"> Back </a></button>
-                                        </form>
-                                        <% } %>
+                            <form>
+                                <button class="btn"><a href="/dogs"> Back </a></button>
+                            </form>
+                            <% } %>
             </div>
         </div>
         <div class="dog-image-section">
@@ -70,37 +70,38 @@
             <% if (user && !dog.owner._id.equals(user._id)) { %>
                 <div class="rating-box">
                     <h2>Rate and Like this dog</h2>
-                                                <% if (userHasLiked) { %>
-                                <form action="/dogs/<%= dog._id %>/liked-by/<%= user._id %>?_method=DELETE"
-                                    method="POST">
-                                    <button class="btn"> Remove like </button>
-                                </form>
-                                <% } else { %>
-                                    <form action="/dogs/<%= dog._id %>/liked-by/<%= user._id %>" method="POST">
-                                        <button class="btn"> Give <%= dog.name %> a like! </button>
-                                    </form>
-                                    <% } %>
-                    <% if (userHasRated) { %>
-                        <form action="/dogs/<%= dog._id %>/rating?_method=DELETE" method="POST">
-                            <button class="btn"> Remove Rating </button>
+                    <% if (userHasLiked) { %>
+                        <form action="/dogs/<%= dog._id %>/liked-by/<%= user._id %>?_method=DELETE" method="POST">
+                            <button class="btn"> Remove like </button>
                         </form>
                         <% } else { %>
-                            <form action="/dogs/<%= dog._id %>/rating" method="POST">
-                                <select name="stars" id="stars" required>
-                                    <option value="1">🐶</option>
-                                    <option value="2">🐶🐶</option>
-                                    <option value="3">🐶🐶🐶</option>
-                                    <option value="4">🐶🐶🐶🐶</option>
-                                    <option value="5">🐶🐶🐶🐶🐶</option>
-                                </select>
-                                <button class="btn">Submit</button>
+                            <form action="/dogs/<%= dog._id %>/liked-by/<%= user._id %>" method="POST">
+                                <button class="btn"> Give <%= dog.name %> a like! </button>
                             </form>
                             <% } %>
+                                <% if (userHasRated) { %>
+                                    <form action="/dogs/<%= dog._id %>/rating?_method=DELETE" method="POST">
+                                        <button class="btn"> Remove Rating </button>
+                                    </form>
+                                    <% } else { %>
+                                        <form action="/dogs/<%= dog._id %>/rating" method="POST">
+                                            <select name="stars" id="stars" required>
+                                                <option value="1">🐶</option>
+                                                <option value="2">🐶🐶</option>
+                                                <option value="3">🐶🐶🐶</option>
+                                                <option value="4">🐶🐶🐶🐶</option>
+                                                <option value="5">🐶🐶🐶🐶🐶</option>
+                                            </select>
+                                            <button class="btn">Submit</button>
+                                        </form>
+                                        <% } %>
                 </div>
                 <% } %>
                     <div class="likes-section">
                         <h3>User Likes</h3>
-                        <p>Liked by <%= dog.likedByUsers.length %> <%= dog.likedByUsers.length === 1 ? 'person' : 'people' %></p>
+                        <p>Liked by <%= dog.likedByUsers.length %>
+                                <%= dog.likedByUsers.length===1 ? 'person' : 'people' %>
+                        </p>
                         <h3>User Ratings</h3>
                         <% if (dog.ratings.length> 0) { %>
                             <% dog.ratings.forEach(rating=> { %>

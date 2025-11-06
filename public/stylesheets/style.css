@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-html, body {
+html,
+body {
     font-size: 100%;
     margin: 0;
     padding: 0;
 }
 
 * {
-  font-family: "Poppins", sans-serif;
-  box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
 }
 
 body {
@@ -31,7 +32,7 @@ main {
     background-color: #FFFFFF;
     padding: 0.625rem 1.25rem;
     position: sticky;
-    top: 0; 
+    top: 0;
     z-index: 1000;
     flex-shrink: 0;
 }
@@ -94,7 +95,6 @@ main {
     border: solid #F8D57E;
     text-decoration: none;
     color: black;
-    text-decoration: none;
     font-weight: 500;
     text-align: center;
     cursor: pointer;
@@ -113,7 +113,7 @@ main {
     font-weight: 500;
     text-align: center;
     cursor: pointer;
-    border: solid #A88120;  
+    border: solid #A88120;
 }
 
 .btn a {
@@ -160,8 +160,8 @@ footer {
 }
 
 .footer-item h3 {
-    margin-bottom: 0.625rem; 
-    font-size: 1.563rem; 
+    margin-bottom: 0.625rem;
+    font-size: 1.563rem;
     color: black;
 }
 
@@ -170,7 +170,7 @@ footer {
     color: black;
 }
 
-/* Main Content */ 
+/* Main Content */
 
 .main-content {
     display: flex;
@@ -234,16 +234,7 @@ footer {
 }
 
 .menu button:hover {
-    display: flex;
-    flex-direction: column;
-    width: 25rem;
-    margin-top: 1.875rem;
-    font-size: 1.25rem;
-    border: solid #1f1151;
-    border-radius: 0.5rem;
-    color: whitesmoke;
-    background-color: #5C33FF;
-    cursor: pointer;   
+    border: 2px solid #180f38;
 }
 
 .menu a {
@@ -257,50 +248,38 @@ footer {
     text-decoration: none;
 }
 
-.navbar a {
-    text-decoration: none;
-    font-weight: 500;
-    padding-left: 1.25rem;
-    color: black;
-}
-
-.navbar a:hover {
-    text-decoration: underline;
-    color: black;
-}
-
 .dog-placeholder {
     height: 12.5rem;
     width: 12.5rem;
 }
 
 #delete-modal {
-  display: none;
-  background-color: rgba(0,0,0,0.4);
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  text-align: center;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  height: 100vh;
-  right: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    height: 100vh;
+    right: 0;
 }
 
 #delete-modal.show {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#delete-modal > div {
-  background: #e3dcc4;
-  padding: 1rem;
-  border-radius: 0.5rem;
+#delete-modal>div {
+    background: #e3dcc4;
+    padding: 1rem;
+    border-radius: 0.5rem;
 }
 
-#delete-modal > div .buttons {
+#delete-modal>div .buttons {
     display: flex;
     justify-content: space-between;
     gap: 1.25rem;
@@ -366,7 +345,8 @@ footer {
     aspect-ratio: 1;
 }
 
-.rating-box, .likes-section {
+.rating-box,
+.likes-section {
     width: 100%;
     max-width: 500px;
     display: flex;
@@ -458,7 +438,7 @@ footer {
 }
 
 .dog-list-image {
-    width: 9.375rem; 
+    width: 9.375rem;
     height: 9.375rem;
     object-fit: cover;
     border-radius: 0.75rem;
@@ -466,14 +446,14 @@ footer {
     border: 2px solid black;
 }
 
-/* Dog New */ 
+/* Dog New */
 
 .main-content-new {
     display: flex;
-    justify-content: center; 
-    align-items: center;    
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    min-height: calc(100vh - 80px); 
+    min-height: calc(100vh - 80px);
     padding: 2rem;
 }
 
@@ -482,7 +462,7 @@ footer {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 500px;      
+    max-width: 500px;
     gap: 1rem;
     text-align: center;
 }
@@ -505,14 +485,14 @@ footer {
     margin-bottom: 1rem;
 }
 
-/* Edit form */ 
+/* Edit form */
 
 .main-content-edit {
     display: flex;
-    justify-content: center; 
-    align-items: center;    
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    min-height: calc(100vh - 80px); 
+    min-height: calc(100vh - 80px);
     padding: 2rem;
 }
 
@@ -521,7 +501,7 @@ footer {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 500px;      
+    max-width: 500px;
     gap: 1rem;
     text-align: center;
 }
@@ -544,14 +524,14 @@ footer {
     margin-bottom: 1rem;
 }
 
-/* Profile */ 
+/* Profile */
 
 .main-content-profile {
     display: flex;
-    justify-content: center; 
-    align-items: center;    
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    min-height: calc(100vh - 80px); 
+    min-height: calc(100vh - 80px);
     padding: 2rem;
 }
 
@@ -560,7 +540,7 @@ footer {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 500px;      
+    max-width: 500px;
     gap: 1rem;
     text-align: center;
 }
@@ -601,14 +581,7 @@ footer {
     margin-bottom: 1rem;
 }
 
-.page-content p {
-    margin-bottom: 0.625rem;
-    font-size: 1.25rem;
-    color: #2D2D2D;
-    opacity: 0.6;
-}
-
-/* Hamburger menu */ 
+/* Hamburger menu */
 
 .off-screen-menu {
     background-color: #ffffff;
@@ -626,7 +599,7 @@ footer {
     font-size: 3rem;
     transition: right 0.3s ease;
     z-index: 2000;
-    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .off-screen-menu.active {
@@ -705,7 +678,7 @@ footer {
 }
 
 
-/* Mobile */ 
+/* Mobile */
 
 @media (max-width: 480px) {
     .ham-menu {
@@ -718,7 +691,7 @@ footer {
     .on-screen-menu {
         display: none;
     }
-    
+
     /* Navbar */
     .navbar {
         padding: 0.5rem 0.75rem;
@@ -828,7 +801,8 @@ footer {
         font-size: 0.95rem;
     }
 
-    .rating-box, .likes-section {
+    .rating-box,
+    .likes-section {
         padding: 1rem;
     }
 
@@ -889,12 +863,12 @@ footer {
     }
 
     /* Modal */
-    #delete-modal > div {
+    #delete-modal>div {
         padding: 0.75rem;
         max-width: 95%;
     }
 
-    #delete-modal > div .buttons {
+    #delete-modal>div .buttons {
         flex-direction: column;
         gap: 0.5rem;
     }

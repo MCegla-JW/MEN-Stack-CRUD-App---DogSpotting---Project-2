@@ -19,11 +19,11 @@ app.use(express.urlencoded()) // req.body
 app.use(express.static('public')) // css
 app.use(morgan('dev')) // morgan 
 app.use(methodOverride('_method')) // override with POST having ?_method=DELETE
-app.use(session ({ // req.session
+app.use(session({ // req.session
     secret: process.env.SESSION_SECRET,
-    resave: false, 
-    saveUninitialized: true, 
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI})
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
 }))
 app.use(passUserToView)
 
