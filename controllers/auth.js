@@ -11,7 +11,7 @@ const router = express.Router()
 
 // * GET - auth/sign-up - form render
 router.get('/sign-up', isSignedOut, (req, res) => {
-    res.render('auth/sign-up.ejs', { error: null })
+    res.render('auth/sign-up.ejs')
 })
 
 // * POST - auth/sing-up - send info to database

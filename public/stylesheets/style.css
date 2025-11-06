@@ -677,6 +677,15 @@ footer {
     display: block;
 }
 
+.flash-message-red {
+    color: darkred;
+    font-weight: bold;
+}
+
+.flash-message-green {
+    color: forestgreen;
+    font-weight: bold;
+}
 
 /* Mobile */
 

@@ -30,6 +30,13 @@
     </nav>
     <main class="dog-show-layout">
         <div class="dog-info">
+            <div class="flash-message-green">
+                <% if (message) { %>
+                    <p>
+                        <%= message %>
+                    </p>
+                    <% } %>
+            </div>
             <h1>
                 <%= dog.name %>
             </h1>

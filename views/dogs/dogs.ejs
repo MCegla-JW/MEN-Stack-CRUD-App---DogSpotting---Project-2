@@ -28,7 +28,12 @@
     </nav>
     <main>
         <div class="dog-list-layout">
+                <% if (message) { %>
+                <p class="flash-message-red"><%= message %> </p>
+            <% } %>
+            <br>
             <h1>All Dog Spots</h1>
+
             <ul>
                 <% dogs.forEach(dog=> { %>
                     <li>

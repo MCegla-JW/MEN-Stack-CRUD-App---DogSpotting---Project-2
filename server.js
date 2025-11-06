@@ -7,6 +7,8 @@ import methodOverride from 'method-override'
 import MongoStore from 'connect-mongo'
 import session from 'express-session' // used for signing in user 
 import passUserToView from './middleware/pass-user-to-view.js'
+import passErrorToView from './middleware/pass-error-to-view.js'
+import passMessageToView from './middleware/pass-message-to-view.js'
 
 // * Controllers / Routers 
 import authController from './controllers/auth.js'
@@ -25,7 +27,7 @@ app.use(session({ // req.session
     saveUninitialized: true,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
 }))
-app.use(passUserToView)
+app.use(passUserToView, passErrorToView, passMessageToView)
 
 app.use((req, res, next) => {
     console.log(req.session)
