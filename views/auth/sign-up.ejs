@@ -44,6 +44,9 @@
                 </label>
                 <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Re-Type Password" required>
             </div>
+                <% if (error) { %>
+                <p id="error-message"><%= error %></p>
+            <% } %>
             <div class="button">
                 <button>Submit</button>
             </div>

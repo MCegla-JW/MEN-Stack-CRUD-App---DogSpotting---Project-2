@@ -3,6 +3,7 @@
 html,
 body {
     height: 100%;
+    font-size: 100%;
 }
 
 * {
@@ -15,37 +16,37 @@ body {
 form button {
     background-color: #F8D57E;
     color: black;
-    font-size: 16px;
+    font-size: 1rem;
     border: solid #F8D57E;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     cursor: pointer;
-    padding: 10px 20px;
-    margin-top: 20px;
+    padding: 0.625rem 1.25rem;
+    margin-top: 1.25rem;
 }
 
 form button:hover {
     background-color: #F8D57E;
     color: black;
-    font-size: 16px;
+    font-size: 1rem;
     border: solid #ebab0b;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     cursor: pointer;
-    padding: 10px 20px;
-    margin-top: 20px;
+    padding: 0.625rem 1.25rem;
+    margin-top: 1.25rem;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
-    max-width: 400%;
-    gap: 15px;
+    max-width: 500px;
+    gap: 0.938rem;
+    margin: 0 auto;
 }
 
 .main-content {
     display: flex;
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 0 auto;
     gap: 0;
 }
@@ -55,57 +56,54 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-right: 600px;
+    padding-right: 37.5rem;
 }
 
 .page-content h1 {
-    font-size: 80px;
+    font-size: 5rem;
     font-weight: 600;
-    letter-spacing: 3px;
-    margin-bottom: 30px;
+    letter-spacing: 0.188rem;
+    margin-bottom: 1.875rem;
     text-align: center;
     white-space: nowrap;
 }
 
-/* main .sign-in .sign-up .profile {
-    background: linear-gradient(to right, #EAE3FF 55%, #f7f5ff 45%);
-    padding-top: 60px;
-    padding-right: 90px;
-}
-*/
-
 .hero-image {
-    width: 500px;
+    width: 31.25rem;
     height: auto;
 }
 
 form input {
-    width: 300px;
-    padding: 15px 20px;
-    font-size: 18px;
-    border: 2px solid grey;
+    width: 18.75rem;
+    padding: 0.938rem 1.25rem;
+    font-size: 1.125rem;
+    border: 0.125rem solid grey;
     box-sizing: border-box;
 }
 
 form textarea[name="description"] {
-    width: 300px;
-    padding: 15px 20px;
-    font-size: 16px;
-    border: 2px solid grey;
-    border-radius: 8px;
+    width: 18.75rem;
+    padding: 0.938rem 1.25rem;
+    font-size: 1rem;
+    border: 0.125rem solid grey;
+    border-radius: 0.5rem;
     resize: vertical;
     box-sizing: border-box;;
 }
 
 form input[type="file"] {
-    font-size: 16px;
-    padding: 10px;
-    border: 2px solid grey;
-    border-radius: 8px;
+    font-size: 1rem;
+    padding: 0.625rem;
+    border: 0.125rem solid grey;
+    border-radius: 0.5rem;
     cursor: pointer;
 }
 
 .new-form-page .page-content {
-    padding-right: 60px;
+    padding-right: 3.75rem;
 }
 
+#error-message {
+    color: darkred;
+    font-weight: bolder;
+}

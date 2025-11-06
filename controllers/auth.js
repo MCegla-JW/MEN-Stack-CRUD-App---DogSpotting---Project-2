@@ -11,7 +11,7 @@ const router = express.Router()
 
 // * GET - auth/sign-up - form render
 router.get('/sign-up', isSignedOut, (req, res) => {
-    res.render('auth/sign-up.ejs')
+    res.render('auth/sign-up.ejs', { error: null })
 })
 
 // * POST - auth/sing-up - send info to database
@@ -21,18 +21,18 @@ router.post('/sign-up', async (req, res) => {
         const email = req.body.email 
         const password = req.body.password 
         const confirmPassword = req.body.confirmPassword
-        if (password !== confirmPassword) return res.status(422).send('Passwords do not match')
+        if (password !== confirmPassword) throw new Error('Passwords do not match. Try again.')
         const usernameInDatabase = await User.findOne({ username: username })
-        if (usernameInDatabase) return res.status(422).send('Username already in use')
+        if (usernameInDatabase) throw new Error(`Username "${username}" already taken. Try a new one.`)
         const emailInDatabase = await User.findOne({ email: email})    
-        if (emailInDatabase) return res.status(422).send('Email already in use')
+        if (emailInDatabase) throw new Error(`Email "${email}" already in use. Try a new one.`)
         req.body.password = bcrypt.hashSync(password, 12)   
         const newUser = await User.create(req.body)
         res.redirect('/auth/sign-in')
         console.log('User created')
     } catch (error) {
-        console.error(error)
-        return res.status(500).send('Something went wrong. Please try again later.')
+    console.log(error.message)
+    res.render('auth/sign-up.ejs', { error: error.message })
     }
 })
 
