@@ -26,8 +26,8 @@
         </div>
     </nav>
     <main>
-        <div class="main-content">
-        <div class=page-content>
+        <div class="main-content-edit">
+        <div class=page-content-edit>
             <h1>EDIT <%= dog.name %></h1>
         <form action="/dogs/<%=dog._id%>?_method=PUT" method="POST" class="edit-form" enctype="multipart/form-data">
                 <div class="name">
@@ -63,9 +63,6 @@
             </div>
         </form>
       </div>  
-        <div class="hero">
-            <img class="hero-image" src="/assets/images/Hero-Image.PNG" alt="cartoon of a small white dog smiling">
-        </div>
     </div>    
     </main>
 </body>

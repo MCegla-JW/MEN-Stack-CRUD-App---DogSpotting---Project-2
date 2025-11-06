@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Dogs</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="stylesheets/forms.css">
+    <link rel="stylesheet" href="/stylesheets/forms.css">
 </head>
 <body>
         <nav class="navbar">
@@ -43,8 +43,9 @@
             <% } else { %> 
             <p>There are currently no dogs to display</p>
         <% } %>
-             
+            <br>
             <h2>My Liked Dogs</h2>
+            <br>
             <% if (likedDogs.length > 0) { %>
             <ul>
                 <% likedDogs.forEach(dog=> { %>

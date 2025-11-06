@@ -101,7 +101,7 @@ main {
 }
 
 .btn:hover {
-        display: inline-block;
+    display: inline-block;
     font-size: 0.938rem;
     padding: 0.5rem 1.563rem;
     margin-right: 1.25rem;
@@ -176,16 +176,17 @@ footer {
     display: flex;
     width: 100%;
     align-items: center;
+    justify-content: center;
     gap: 2rem;
+    padding: 2rem;
 }
 
 .page-content {
-    flex: 1;
+    flex: 0 0 45%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 2rem;
-    min-width: 300px;
 }
 
 .page-content h1 {
@@ -205,12 +206,10 @@ footer {
 }
 
 .hero {
-    flex: 1;
+    flex: 0 0 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
-    min-width: 300px;
 }
 
 .hero img {
@@ -423,6 +422,8 @@ footer {
 .dog-list-layout h1 {
     font-size: 3rem;
     margin-bottom: 2rem;
+    text-align: center;
+
 }
 
 .dog-list-layout ul {
@@ -465,12 +466,14 @@ footer {
     border: 2px solid black;
 }
 
+/* Dog New */ 
+
 .main-content-new {
     display: flex;
-    justify-content: center; /* horizontal center */
-    align-items: center;     /* vertical center */
+    justify-content: center; 
+    align-items: center;    
     width: 100%;
-    min-height: calc(100vh - 80px); /* optional: adjust if you have navbar */
+    min-height: calc(100vh - 80px); 
     padding: 2rem;
 }
 
@@ -479,18 +482,171 @@ footer {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 600px;      /* controls form width */
-    padding: 0;            /* remove old padding-right */
+    max-width: 500px;      
+    gap: 1rem;
+    text-align: center;
+}
+
+.page-content-new form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     gap: 1rem;
 }
 
+.page-content-new form input,
+.page-content-new form button {
+    width: 100%;
+}
 
+.page-content-new h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Edit form */ 
+
+.main-content-edit {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    width: 100%;
+    min-height: calc(100vh - 80px); 
+    padding: 2rem;
+}
+
+.page-content-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;      
+    gap: 1rem;
+    text-align: center;
+}
+
+.page-content-edit form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+}
+
+.page-content-edit form input,
+.page-content-edit form button {
+    width: 100%;
+}
+
+.page-content-edit h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Profile */ 
+
+.main-content-profile {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    width: 100%;
+    min-height: calc(100vh - 80px); 
+    padding: 2rem;
+}
+
+.page-content-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;      
+    gap: 1rem;
+    text-align: center;
+}
+
+.page-content-profile h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+/* Sign in and Sign up */
+
+.main-content-s {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.page-content-s {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.page-content-s h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.page-content p {
+    margin-bottom: 0.625rem;
+    font-size: 1.25rem;
+    color: #2D2D2D;
+    opacity: 0.6;
+}
 
 /* Mobile */ 
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
+    /* Navbar */
+    .navbar {
+        padding: 0.5rem 0.75rem;
+    }
+
     .app-logo {
-        height: 2rem;
+        height: 2.5rem;
+    }
+
+    .app-name {
+        font-size: 0.85rem;
+    }
+
+    .nav-right {
+        gap: 0.25rem;
+    }
+
+    .navbar a {
+        padding-left: 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    /* Buttons */
+    .btn {
+        font-size: 0.75rem;
+        padding: 0.4rem 1rem;
+        margin-right: 0.5rem;
+    }
+
+    .controls {
+        gap: 0.25rem;
+    }
+
+    /* Footer */
+    footer {
+        padding: 1.5rem 1rem;
     }
 
     .footer-content {
@@ -498,30 +654,145 @@ footer {
         gap: 2rem;
     }
 
-    footer {
-        padding: 1.5rem 1 rem;
+    .footer-item {
+        min-width: auto;
     }
 
     .footer-item h3 {
         font-size: 1.1rem;
+        margin-bottom: 0.5rem;
     }
 
     .footer-item p {
         font-size: 0.9rem;
     }
 
-}
-
-
-/* Tablets */
-
-@media (max-width: 900px) {
-    .app-logo {
-        height: 4rem;
+    /* Main Content */
+    .main-content {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
     }
 
-    .footer-content {
-        gap: 4rem;
+    .page-content {
+        padding: 0.5rem;
     }
 
+    .page-content h1 {
+        font-size: 2rem;
+        letter-spacing: 0.05rem;
+    }
+
+    .page-content p {
+        font-size: 1rem;
+    }
+
+    .hero img {
+        max-width: 280px;
+    }
+
+    .menu button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        font-size: 1rem;
+        margin-top: 1rem;
+        padding: 0.5rem;
+    }
+
+    /* Dog Show Layout */
+    .dog-show-layout {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .dog-info h1 {
+        font-size: 1.75rem;
+    }
+
+    .dog-info h5 {
+        font-size: 1.1rem;
+    }
+
+    .dog-info p {
+        font-size: 0.95rem;
+    }
+
+    .rating-box, .likes-section {
+        padding: 1rem;
+    }
+
+    .rating-box h2 {
+        font-size: 1.3rem;
+    }
+
+    .likes-section h3 {
+        font-size: 1.2rem;
+    }
+
+    /* Dog List */
+    .dog-list-layout {
+        padding: 1.5rem 1rem;
+    }
+
+    .dog-list-layout h1 {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .dog-list-layout ul {
+        gap: 1rem;
+    }
+
+    .dog-list-layout li a {
+        font-size: 1rem;
+    }
+
+    .dog-list-image {
+        width: 7rem;
+        height: 7rem;
+    }
+
+    /* Forms */
+    .main-content-new,
+    .main-content-edit,
+    .main-content-profile,
+    .main-content-s {
+        padding: 1rem;
+    }
+
+    .page-content-new h1,
+    .page-content-edit h1,
+    .page-content-profile h1 {
+        font-size: 1.75rem;
+    }
+
+    .page-content-s h1 {
+        font-size: 2rem;
+    }
+
+    .page-content-new,
+    .page-content-edit,
+    .page-content-profile,
+    .page-content-s {
+        gap: 1rem;
+    }
+
+    /* Modal */
+    #delete-modal > div {
+        padding: 0.75rem;
+        max-width: 95%;
+    }
+
+    #delete-modal > div .buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .dog-placeholder {
+        height: 8rem;
+        width: 8rem;
+    }
 }
