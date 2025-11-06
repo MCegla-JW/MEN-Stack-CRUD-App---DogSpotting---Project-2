@@ -61,7 +61,7 @@ main {
     flex-direction: column;
     line-height: 1.1;
     font-weight: bold;
-    font-size: 1.2rem
+    font-size: 1.2rem;
 }
 
 .nav-right {
@@ -608,9 +608,117 @@ footer {
     opacity: 0.6;
 }
 
+/* Hamburger menu */ 
+
+.off-screen-menu {
+    background-color: #ffffff;
+    height: 100vh;
+    width: 100%;
+    max-width: 450px;
+    position: fixed;
+    top: 0;
+    right: -450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 3rem;
+    transition: right 0.3s ease;
+    z-index: 2000;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+}
+
+.off-screen-menu.active {
+    right: 0;
+}
+
+.off-screen-menu nav {
+    width: 100%;
+}
+
+.off-screen-menu .sub-nav {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.off-screen-menu .sub-nav a {
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+.off-screen-menu .sub-nav p {
+    margin: 0;
+}
+
+.ham-menu {
+    height: 50px;
+    width: 50px;
+    margin-left: auto;
+    position: relative;
+    cursor: pointer;
+    display: none;
+    z-index: 3000;
+}
+
+.ham-menu span {
+    height: 5px;
+    width: 100%;
+    background-color: black;
+    border-radius: 25px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.ham-menu span:nth-child(1) {
+    top: 25%;
+}
+
+.ham-menu span:nth-child(2) {
+    top: 50%;
+}
+
+.ham-menu span:nth-child(3) {
+    top: 75%;
+}
+
+.ham-menu.active span:nth-child(1) {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.ham-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.ham-menu.active span:nth-child(3) {
+    top: 50%;
+    transform: translate(-50%, 50%) rotate(-45deg);
+}
+
+.on-screen-menu {
+    display: block;
+}
+
+
 /* Mobile */ 
 
 @media (max-width: 480px) {
+    .ham-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .on-screen-menu {
+        display: none;
+    }
+    
     /* Navbar */
     .navbar {
         padding: 0.5rem 0.75rem;
