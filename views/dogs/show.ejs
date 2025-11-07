@@ -71,7 +71,7 @@
         </div>
         <div class="dog-image-section">
             <a href="/dogs/<%= dog._id %>">
-                <img src="<%= dog.photoURL ? dog.photoURL : '/assets/images/placeholder.png' %>" alt="<%= dog.name %>"
+                <img src="<%= dog.photoURL ? dog.photoURL : 'https://res.cloudinary.com/dhgfzn1ov/image/upload/v1762519160/placeholder_mmoqor.png' %>" alt="<%= dog.name %>"
                     class="dog-list-image">
             </a>
             <% if (user && !dog.owner._id.equals(user._id)) { %>
