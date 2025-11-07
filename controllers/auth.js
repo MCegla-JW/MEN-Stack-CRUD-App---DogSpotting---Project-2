@@ -46,9 +46,9 @@ router.get('/sign-in', isSignedOut, (req, res) => {
 router.post('/sign-in', async (req, res) => {
     try {
         const userToSignIn = await User.findOne({ username: req.body.username })
-        if (!userToSignIn) return res.status(401).send('User does not exist')
+        if (!userToSignIn) throw new Error('Invalid credentials. Try again!')
         if (!bcrypt.compareSync(req.body.password, userToSignIn.password)) {
-            return res.status(401).send('Invalid credentials')
+            throw new Error('Invalid credentials. Try again!')
         }
         //console.log('REQ SESSION:', req.session)
         req.session.user = {
@@ -57,8 +57,8 @@ router.post('/sign-in', async (req, res) => {
         }
         res.redirect('/auth/profile')
     } catch (error) {
-        console.error('Something went wrong')
-        return res.status(500).send('Something went wrong. Please try again later.')
+        console.error(error.message)
+        res.render('auth/sign-in.ejs', { error: error.message })
     }
 })
 
