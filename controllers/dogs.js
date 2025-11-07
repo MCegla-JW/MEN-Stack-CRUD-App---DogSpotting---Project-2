@@ -90,7 +90,7 @@ router.delete('/:dogId', isSignedIn, async (req, res) => {
     }
 })
 
-// * EDIT - edit the listing
+// * EDIT 
 router.get('/:dogId/edit', isSignedIn, async (req, res) => {
     try {
         const dogId = req.params.dogId
@@ -107,13 +107,13 @@ router.get('/:dogId/edit', isSignedIn, async (req, res) => {
 
 })
 
-// * UPDATE - update the listing 
+// * UPDATE 
 router.put('/:dogId', isSignedIn, upload.single('photoURL'), async (req, res) => {
     try {
         const dogId = req.params.dogId
         const dog = await Dog.findById(dogId)
         if (!dog.owner.equals(req.session.user._id)) {
-            req.session.message = 'Ypu do not have permission to edit this lsiting'
+            req.session.message = 'You do not have permission to edit this post'
             return res.redirect(`/dogs/${dogId}`)
         }
         if (req.file) {
