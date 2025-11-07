@@ -265,25 +265,29 @@ Screenshots to follow
 
 - Multiple Photo Support: Allow users to select one main profile photo and upload additional images to a gallery accessible on the spot detail page
 - Average Ratings Display: Implement a main ratings bar showing the average of all user-submitted ratings for each spot
-- Flash Messages: Add confirmation messages for:
+- Flash Messages (add confirmation messages for):
 --User account creation
 --Spot creation/update
 --Sign out confirmation
--Account Management: Enable users to delete their account and profile
+
+- Account Management: Enable users to delete their account and profile
 - Image Preview: Add real-time image preview in the create/edit post form before submission
 - Comments: Add a commenting system for users to discuss dog spots
 
 ## Installation & Setup
 
-# Install dependencies
-npm install
+1. Clone the repo
+- git clone https://github.com/MCegla-JW/MEN-Stack-CRUD-App---DogSpotting---Project-2.git
 
-# Create .env file with the following variables:
-# MONGODB_URI=your_mongodb_connection_string
-# SESSION_SECRET=your_session_secret
-# PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-# CLOUDINARY_API_KEY=your_cloudinary_key
-# CLOUDINARY_API_SECRET=your_cloudinary_secret
+2. Install dependencies
+- npm install
 
-# Start the development server
-npm run dev
+3. Create .env file with the following variables:
+ - MONGODB_URI=your_mongodb_connection_string
+- SESSION_SECRET=your_session_secret
+- PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloudinary_name
+- CLOUDINARY_API_KEY=your_cloudinary_key
+- CLOUDINARY_API_SECRET=your_cloudinary_secret
+
+4. Start the development server
+- npm run dev
