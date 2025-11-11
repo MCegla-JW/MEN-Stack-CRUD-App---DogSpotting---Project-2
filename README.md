@@ -234,7 +234,7 @@ Added comprehensive try-catch blocks throughout the application with user-friend
 
 ##  Screenshots
 
-Screenshots to follow
+<img src="./screenshots/IMG_4428.jpg" alt="Landing Page" width="400"> <img src="./screenshots/IMG_4433.jpg" alt="Login Error" width="400"> <img src="./screenshots/IMG_4440.jpg" alt="Dog Profile" width="400"> <img src="./screenshots/IMG_4439.jpg" alt="Rate Dog" width="400"> <img src="./screenshots/IMG_4441.jpg" alt="Delete Modal" width="400"> <img src="./screenshots/IMG_4435.jpg" alt="Hamburger Menu" width="400">
 
 ## Challenges
 
@@ -273,6 +273,7 @@ Screenshots to follow
 - Account Management: Enable users to delete their account and profile
 - Image Preview: Add real-time image preview in the create/edit post form before submission
 - Comments: Add a commenting system for users to discuss dog spots
+- Dark Mode
 
 ## Installation & Setup
 
