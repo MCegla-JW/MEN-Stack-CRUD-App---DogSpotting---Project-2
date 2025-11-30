@@ -4,7 +4,7 @@ A full-stack app that allows users to share, like, and rate their daily dog spot
 
 # Description
 
-Dog Spotting App is a MEN (MongoDB, Express, Node.js) stack CRUD app where users can document and share dogs they've spotted in their daily lives. The platform features user authentication, photo uploads, social engagement through likes, and a rating system. This was a solo project completed over one week as part of a software engineering bootcamp.
+Dog Spotting App is a MEN (MongoDB, Express, Node.js) stack CRUD app where users can document and share dogs they've spotted in their daily lives. The platform features user authentication, photo uploads, social engagement through likes, and a rating system. This is my seond project in my three-month intensive bootcamp at General Assembly.
 
 # Deployment Link
 
