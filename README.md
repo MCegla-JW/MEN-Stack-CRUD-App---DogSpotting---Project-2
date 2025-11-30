@@ -1,6 +1,6 @@
 # Dog Spotting App
 
-A full-stack web app that allows users to share, like, and rate their daily dog spots with a community of fellow dog enthusiasts.
+A full-stack app that allows users to share, like, and rate their daily dog spots with a community of fellow dog enthusiasts.
 
 # Description
 
