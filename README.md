@@ -291,4 +291,4 @@ Added comprehensive try-catch blocks throughout the application with user-friend
 - CLOUDINARY_API_SECRET=your_cloudinary_secret
 
 4. Start the development server
-- npm run dev
+- npm start
