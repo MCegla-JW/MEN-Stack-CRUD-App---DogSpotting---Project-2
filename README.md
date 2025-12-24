@@ -4,7 +4,7 @@ A full-stack app that allows users to share, like, and rate their daily dog spot
 
 # Description
 
-Dog Spotting App is a MEN (MongoDB, Express, Node.js) stack CRUD app where users can document and share dogs they've spotted in their daily lives. The platform features user authentication, photo uploads, social engagement through likes, and a rating system. This is my seond project in my three-month intensive bootcamp at General Assembly.
+Dog Spotting App is a MEN (MongoDB, Express, Node.js) stack CRUD app where users can document and share dogs they've spotted in their daily lives. The platform features user authentication, photo uploads, social engagement through likes, and a rating system. This is my second project in my three-month intensive bootcamp at General Assembly.
 
 # Deployment Link
 
@@ -22,7 +22,7 @@ Dog Spotting App is a MEN (MongoDB, Express, Node.js) stack CRUD app where users
 | Day 6 | Styling and responsive design
 | Day 7 | Testing, bug fixes, deployment, ReadMe
 
-#  Technologies Used
+# Technologies Used
 
 ## Backend:
 
@@ -104,15 +104,43 @@ Project Management
    
 Implemented the foundational routes for creating, reading, updating, and deleting dog spots, along with the Dog and User model schemas.
 
+| Delete Modal | Show Dog | Welcome Page | 
+|---------------------|---------------------|---------------------|
+| <img src="./screenshots/IMG_4441.jpg" alt="Delete Modal" width="400"> | <img src="./screenshots/IMG_4440.jpg" alt="Dog Profile" width="400"> | <img src="./screenshots/IMG_4428.jpg" alt="Landing Page" width="400"> |
+
 2. Authentication System
    
 Built user registration and login pages with bcrypt password hashing and Express session management. Created middleware for route protection (isSignedIn, isSignedOut).
+
+```js
+// * POST - auth/sign-up - send info to database
+router.post('/sign-up', async (req, res) => {
+    try {
+        const username = req.body.username
+        const email = req.body.email
+        const password = req.body.password
+        const confirmPassword = req.body.confirmPassword
+        if (password !== confirmPassword) throw new Error('Passwords do not match. Try again.')
+        const usernameInDatabase = await User.findOne({ username: username })
+        if (usernameInDatabase) throw new Error(`Username "${username}" already taken. Try a new one.`)
+        const emailInDatabase = await User.findOne({ email: email })
+        if (emailInDatabase) throw new Error(`Email "${email}" already in use. Try a new one.`)
+        req.body.password = bcrypt.hashSync(password, 12)
+        const newUser = await User.create(req.body)
+        res.redirect('/auth/sign-in')
+        console.log('User created')
+    } catch (error) {
+        console.log(error.message)
+        res.render('auth/sign-up.ejs', { error: error.message })
+    }
+})
+```
 
 3. Ratings Feature
    
 Developed a subdocument schema for ratings, allowing users to rate dog spots. Implemented logic to prevent multiple ratings and likes from the same user.
 
-Back End:
+Backend:
 ```js
 router.get('/:dogId', async (req, res) => {
     try {
@@ -134,7 +162,7 @@ router.get('/:dogId', async (req, res) => {
 })
 ```
 
-Front End:
+Frontend:
 ```js
             <% if (user && !dog.owner._id.equals(user._id)) { %>
                 <div class="rating-box">
@@ -167,6 +195,10 @@ Front End:
                 </div>
                 <% } %>
 ```
+| Rate Dog | Unrate Dog | 
+|---------------------|---------------------|
+| <img src="./screenshots/IMG_4439.jpg" alt="Rate Dog" width="400"> |  <img src="./screenshots/unrate-dog.png" alt="Unrate Dog" width="400"> | 
+
 4. Image Upload Integration
    
 Integrated Multer for handling multipart/form-data and Cloudinary for cloud-based image storage. Created a custom buffer upload function to handle image processing.
@@ -176,17 +208,57 @@ Integrated Multer for handling multipart/form-data and Cloudinary for cloud-base
     req.body.photoURL = uploadResult.secure_url
 }
 ```
+| Image Upload| 
+|---------------------|
+| <img src="./screenshots/photo-upload.png" alt="Rate Dog" width="400"> |
+
 5. Like Functionality
    
 Implemented a like/unlike system using MongoDB's $push and $pull operators to manage the likedByUsers array on dog documents.
+
+```js
+
+// * Add Favourite     
+router.post('/:dogId/liked-by/:userId', isSignedIn, async (req, res) => {
+    try {
+        const dogId = req.params.dogId
+        await Dog.findByIdAndUpdate(dogId, {
+            $push: { likedByUsers: req.session.user._id },
+        })
+        res.redirect(`/dogs/${dogId}`)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Something went wrong. Please try again later.')
+    }
+})
+
+// * Delete Favourite     
+router.delete('/:dogId/liked-by/:userId', isSignedIn, async (req, res) => {
+    try {
+        const dogId = req.params.dogId
+        await Dog.findByIdAndUpdate(dogId, {
+            $pull: { likedByUsers: req.session.user._id },
+        })
+        res.redirect(`/dogs/${dogId}`)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Something went wrong. Please try again later.')
+    }
+})
+```
 
 6. Responsive Design
    
 Created a mobile-first responsive design with a hamburger menu for navigation on smaller screens.
 
+| Hamburger Menu | 
+|---------------------|
+| <img src="./screenshots/IMG_4435.jpg" alt="Hamburger Menu" width="400"> |
+
 7. Authorization & Ownership Verification
     
 Implemented authorization checks to ensure users can only edit or delete their own posts.
+
 ```js Verifying ownership before allowing updates
 
 router.put('/:dogId', isSignedIn, upload.single('photoURL'), async (req, res) => {
@@ -204,7 +276,7 @@ router.put('/:dogId', isSignedIn, upload.single('photoURL'), async (req, res) =>
         }
 
         const updatedDog = await Dog.findByIdAndUpdate(dogId, req.body)
-        req.session.message = `Dog ${updatedDog.name} was succesfully updated.`
+        req.session.message = `Dog ${updatedDog.name} was successfully updated.`
         return res.redirect(`/dogs/${dogId}`)
     } catch (error) {
         console.error(error)
@@ -228,13 +300,17 @@ router.get('/my-dogs', isSignedIn, async (req, res) => {
     }
 })
 ```
+| No Dogs | Added Dogs| 
+|---------------------|---------------------|
+| <img src="./screenshots/no-dogs.png" alt="No Dogs" width="400"> | <img src="./screenshots/my-dogs.png" alt="Username Error" width="400"> |
+
 9. Error Handling
     
 Added comprehensive try-catch blocks throughout the application with user-friendly error messages.
 
-##  Screenshots
-
-<img src="./screenshots/IMG_4428.jpg" alt="Landing Page" width="400"> <img src="./screenshots/IMG_4433.jpg" alt="Login Error" width="400"> <img src="./screenshots/IMG_4439.jpg" alt="Rate Dog" width="400"> <img src="./screenshots/IMG_4441.jpg" alt="Delete Modal" width="400"> <img src="./screenshots/IMG_4440.jpg" alt="Dog Profile" width="400"> <img src="./screenshots/IMG_4435.jpg" alt="Hamburger Menu" width="400"> 
+| Login Error | Username Error | Invalid Credentials Error | Email Error | 
+|---------------------|---------------------|---------------------|---------------------|
+| <img src="./screenshots/IMG_4433.jpg" alt="Login Error" width="400"> | <img src="./screenshots/username-error.png" alt="Username Error" width="400"> | <img src="./screenshots/invalid-credentials.png" alt="Invalid Credentials Error" width="400"> | <img src="./screenshots/email-error.png" alt="Email Error" width="400"> | 
 
 ## Challenges
 
